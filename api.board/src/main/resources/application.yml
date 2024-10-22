@@ -8,6 +8,8 @@ spring:
     url: r2dbc:mariadb://localhost:3307/reactive?useUnicode=true&characterEncoding=utf8
     username: root
     password: admin123
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 
 logging:
   level:
