@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api.board
+  r2dbc:
+    url: r2dbc:mariadb://localhost:3307/reactive?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: admin123
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc:
+          core:
+            DefaultDatabaseClient: debug
