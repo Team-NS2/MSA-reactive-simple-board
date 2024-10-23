@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: api-board
+          uri: lb://api-board
+          predicates:
+            - Path=/api/*/board/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+            - Method=GET,POST,PATCH,PUT,DELETE
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5s
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
