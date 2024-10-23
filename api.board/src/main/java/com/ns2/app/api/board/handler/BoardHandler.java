@@ -23,8 +23,9 @@ public class BoardHandler {
     public Mono<ServerResponse> findById(ServerRequest request) {
         return ok().contentType(MediaType.APPLICATION_JSON)
                 .body(boardService.findById(Long.parseLong(request.pathVariable("id")))
-                                .map(boardConverter::toBoardResponseDto), BoardResponseDto.class)
-                .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()));
+                                .map(boardConverter::toBoardResponseDto)
+                                .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()))
+                        , BoardResponseDto.class);
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {

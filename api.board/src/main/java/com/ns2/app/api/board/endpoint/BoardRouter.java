@@ -15,8 +15,8 @@ public class BoardRouter {
     @Bean
     public RouterFunction<ServerResponse> routes(BoardHandler handler) {
         return RouterFunctions
-                .route(GET("/board/{id}").and(accept(APPLICATION_JSON)), handler::findById)
-                .andRoute(POST("/board").and(accept(APPLICATION_JSON)), handler::save)
+                .route(POST("/api/v1/board").and(accept(APPLICATION_JSON)), handler::save)
+                .andRoute(GET("/api/v1/board/{id}").and(accept(APPLICATION_JSON)), handler::findById)
                 ;
     }
 }

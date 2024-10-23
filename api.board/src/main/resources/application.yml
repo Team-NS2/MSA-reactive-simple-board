@@ -1,15 +1,16 @@
 server:
-  port: 8080
+  port: 0
 
 spring:
   application:
-    name: api.board
+    name: api-board
   r2dbc:
     url: r2dbc:mariadb://localhost:3307/reactive?useUnicode=true&characterEncoding=utf8
     username: root
     password: admin123
   jackson:
     property-naming-strategy: SNAKE_CASE
+
 
 logging:
   level:
@@ -18,3 +19,9 @@ logging:
         r2dbc:
           core:
             DefaultDatabaseClient: debug
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
